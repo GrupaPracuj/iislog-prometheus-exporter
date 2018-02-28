@@ -1,0 +1,11 @@
+*.attr
+*.exe
+*.log
+*.old
+*.swp
+*.test
+*.out
+/pkg
+/bin
+/glide
+debug
