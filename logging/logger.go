@@ -13,13 +13,12 @@ import (
 
 const logFileName string = "log.txt"
 const logFileDir string = "logs\\"
-const logRotateEveryMb int = 10
-const filesNumber int = 0
-const maxFilesAge int = 0
+var rotateEveryMb int = 10
+var filesNumber int = 0
+var maxFilesAge int = 0
 
 func Init(cfg *config.Config, isDebug bool) (logger *log.Logger) {
 	var outputFile string
-	var rotateEveryMb int
 	var logWriter io.Writer
 
 	ex, err := os.Executable()
@@ -27,16 +26,25 @@ func Init(cfg *config.Config, isDebug bool) (logger *log.Logger) {
 		panic(err)
 	}
 	exeDir := filepath.Dir(ex)
+	outputFile = exeDir + "\\" + logFileDir + logFileName
 
-	if cfg.Logger != (config.LoggerConfig{}) && len(cfg.Logger.OutputDir) > 0 {
-		outputFile = cfg.Logger.OutputDir + "\\" + logFileName
-	} else {
-		outputFile = exeDir + "\\" + logFileDir + logFileName
-	}
-	if cfg.Logger != (config.LoggerConfig{}) && cfg.Logger.RotateEveryMb > 0 {
-		rotateEveryMb = cfg.Logger.RotateEveryMb
-	} else {
-		rotateEveryMb = logRotateEveryMb
+	if cfg.Logger != (config.LoggerConfig{}) {
+
+		if len(cfg.Logger.OutputDir) > 0 {
+			outputFile = cfg.Logger.OutputDir + "\\" + logFileName
+		}
+
+		if cfg.Logger.RotateEveryMb > 0 {
+			rotateEveryMb = cfg.Logger.RotateEveryMb
+		}
+
+		if cfg.Logger.FilesNumber > 0 {
+			filesNumber = cfg.Logger.FilesNumber
+		}
+
+		if cfg.Logger.MaxAge > 0 {
+			maxFilesAge = cfg.Logger.MaxAge
+		}
 	}
 
 	logWriter = &lumberjack.Logger{
