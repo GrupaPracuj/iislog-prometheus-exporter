@@ -53,10 +53,11 @@ func processOneFile(filename string, grokParser *grok.Grok, metrics *Metrics, si
 		ReOpen: true,
 		Poll:   true,
 	})
+	
 	if err != nil {
-		logging.Error(logger, "", err)
-		panic(err)
+		logging.Error(logger, fmt.Sprintf("Error tailing file %s", filename), err)
 	}
+	
 	//Set labels and metrics
 	go func(siteCfg config.SiteConfig, metricCfg config.MetricConfig) {
 		metricsCount := len(metricCfg.Labels)

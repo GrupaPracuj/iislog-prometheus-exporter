@@ -34,6 +34,8 @@ type daemonCommand struct {
 	logger *log.Logger
 }
 
+type checkConfigCommand struct{}
+
 func (c *versionCommand) Run(_ []string) int {
 	fmt.Printf("%v\r\n", c.version)
 	return 0
@@ -100,4 +102,17 @@ func (c *daemonCommand) Help() string {
 
 func (c *daemonCommand) Synopsis() string {
 	return "Run IISLogExporter as daemon"
+}
+
+func (c *checkConfigCommand) Run(_ []string) int {
+	fmt.Printf("Configuration file is valid")
+	return 0
+}
+
+func (c *checkConfigCommand) Help() string {
+	return "Check if configuration file is valid"
+}
+
+func (c *checkConfigCommand) Synopsis() string {
+	return "Check if configuration file is valid"
 }

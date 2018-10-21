@@ -30,8 +30,4 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func enableHelpPage(appConfig *config.Config) {
 	http.HandleFunc("/", handler)
-
-	listenAddr := fmt.Sprintf("%s:%d", appConfig.Listen.Address, appConfig.Listen.Port)
-
-	go http.ListenAndServe(listenAddr, nil)
 }
