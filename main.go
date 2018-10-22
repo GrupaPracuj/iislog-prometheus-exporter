@@ -31,6 +31,13 @@ func main() {
 				version: version.Version,
 			}, nil
 		},
+		"check-config": func() (cli.Command, error) {
+			_, confErr := config.LoadConfig()
+			if confErr != nil {
+				panic(confErr)
+			}
+			return &checkConfigCommand{}, nil
+		},
 		"debug": func() (cli.Command, error) {
 			cfg, confErr := config.LoadConfig()
 			if confErr != nil {

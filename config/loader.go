@@ -2,13 +2,14 @@ package config
 
 import (
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
-	"log"
 
 	"github.com/hashicorp/hcl"
 )
+
 const configFile string = "config.hcl"
 
 func LoadConfig() (*Config, error) {

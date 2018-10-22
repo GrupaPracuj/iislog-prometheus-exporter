@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/GrupaPracuj/iislog-prometheus-exporter/config"
 	"github.com/GrupaPracuj/iislog-prometheus-exporter/logging"
@@ -26,5 +27,12 @@ func ExportLogs(cfg *config.Config, logger *log.Logger) {
 	logging.Info(logger, fmt.Sprintf("Running HTTP server on address %s", listenAddr))
 
 	http.Handle("/metrics", prometheus.Handler())
-	go http.ListenAndServe(listenAddr, nil)
+
+	go func() {
+		err := http.ListenAndServe(listenAddr, nil)
+		if err != nil {
+			logging.Error(logger, "Error starting service", err)
+			os.Exit(-1)
+		}
+	}()
 }
