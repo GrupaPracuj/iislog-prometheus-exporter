@@ -17,7 +17,7 @@ func LoadConfig() (*Config, error) {
 	cfg, err := loadConfigFromFile(configFile)
 
 	if cfg.Listen.Port == 0 {
-		cfg.Listen.Port = 4040
+		cfg.Listen.Port = 9511
 	}
 
 	if len(cfg.Listen.Address) == 0 {
