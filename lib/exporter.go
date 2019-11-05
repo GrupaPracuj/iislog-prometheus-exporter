@@ -9,7 +9,7 @@ import (
 	"github.com/GrupaPracuj/iislog-prometheus-exporter/config"
 	"github.com/GrupaPracuj/iislog-prometheus-exporter/logging"
 
-	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func ExportLogs(cfg *config.Config, logger *log.Logger) {
@@ -26,7 +26,7 @@ func ExportLogs(cfg *config.Config, logger *log.Logger) {
 	listenAddr := fmt.Sprintf("%s:%d", cfg.Listen.Address, cfg.Listen.Port)
 	logging.Info(logger, fmt.Sprintf("Running HTTP server on address %s", listenAddr))
 
-	http.Handle("/metrics", prometheus.Handler())
+	http.Handle("/metrics", promhttp.Handler())
 
 	go func() {
 		err := http.ListenAndServe(listenAddr, nil)
