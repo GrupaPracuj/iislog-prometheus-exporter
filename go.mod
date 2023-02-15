@@ -14,11 +14,10 @@ require (
 	github.com/mitchellh/go-testing-interface v1.0.0 // indirect
 	github.com/mitchellh/mapstructure v1.1.2 // indirect
 	github.com/pascaldekloe/goe v0.1.0 // indirect
-	github.com/prometheus/client_golang v1.2.1
-	github.com/stretchr/testify v1.4.0 // indirect
+	github.com/prometheus/client_golang v1.11.1
 	github.com/vjeantet/grok v1.0.0
 	github.com/yosida95/uritemplate v0.0.0-20170413134207-5c22f358020b
-	golang.org/x/sys v0.0.0-20191105142833-ac3223d80179
+	golang.org/x/sys v0.0.0-20210603081109-ebe580a85c40
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
