@@ -9,7 +9,7 @@ type Metrics struct {
 	countTotal          *prometheus.CounterVec
 	bytesSentTotal      *prometheus.SummaryVec
 	bytesReceivedTotal  *prometheus.SummaryVec
-	responseMiliSeconds *prometheus.SummaryVec
+	responseMiliSeconds *prometheus.HistogramVec
 }
 
 func (m *Metrics) Init(cfg *config.MetricConfig) {
@@ -36,10 +36,11 @@ func (m *Metrics) Init(cfg *config.MetricConfig) {
 		Help:      "Total amount of transferred bytes",
 	}, labels)
 
-	m.responseMiliSeconds = prometheus.NewSummaryVec(prometheus.SummaryOpts{
+	m.responseMiliSeconds = prometheus.NewHistogramVec(prometheus.HistogramOpts{
 		Namespace: cfg.MetricPrefix,
 		Name:      "http_response_time_miliseconds",
 		Help:      "Time needed by IIS to handle requests",
+		Buckets:   []float64{1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0},
 	}, labels)
 
 	prometheus.MustRegister(m.countTotal)
