@@ -35,7 +35,7 @@ site "Example1" {
       source = "method"                     # Field name from grok. Label value will be set basing on this field. Default is value of label_name.
       rules = [
         {
-          pattern = "copyFromSource"        # Exacly copy value from grok field to label
+          pattern = "copyFromSource"        # Exactly copy value from grok field to label
         }
       ]
     },
